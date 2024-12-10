@@ -1,0 +1,8 @@
+* Advent of Code 2024
+
+# SPDX-License-Identifier: MIT
+
+Copyright © 2024, David M. Cooke
+
+The code in this repository is covered by the MIT licence, see the
+included LICENSE file.
