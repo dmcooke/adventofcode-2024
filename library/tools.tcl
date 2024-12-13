@@ -11,20 +11,28 @@ proc debug_puts {arg} {
     }
 }
 
-proc list_max {lst cmd args} {
+proc list_max {lst args} {
     set max {}
     foreach x $lst {
-        set n [uplevel 1 [list $cmd {*}$args $x]]
+        if {[llength $args] == 0} {
+            set n $x
+        } else {
+            set n [uplevel 1 [list {*}$args $x]]
+        }
         if {$max eq "" || $n > $max} {
             set max $n
         }
     }
     return $max
 }
-proc list_min {lst cmd} {
+proc list_min {lst args} {
     set min {}
     foreach x $lst {
-        set n [uplevel 1 [list $cmd {*}$args $x]]
+        if {[llength $args] == 0} {
+            set n $x
+        } else {
+            set n [uplevel 1 [list {*}$args $x]]
+        }
         if {$min eq "" || $n < $min} {
             set min $n
         }
@@ -32,6 +40,28 @@ proc list_min {lst cmd} {
     return $min
 }
 
+proc list_extrema {lst args} {
+    set max {}
+    set min {}
+    foreach x $lst {
+        if {[llength $args] == 0} {
+            set n $x
+        } else {
+            set n [uplevel 1 [list {*}$args $x]]
+        }
+        if {$max eq ""} {
+            set max $n
+            set min $n
+        } elseif {$n < $min} {
+            set min $n
+        } elseif {$max < $n} {
+            set max $n
+        }
+    }
+    return [list $min $max]
+}
+
+proc ::id {x} {return $x}
 
 proc fq {level name} {
     if {[string match {::*} $name]} { return $name }

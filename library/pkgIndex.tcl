@@ -6,6 +6,7 @@ if {[package vsatisfies [package provide Tcl] 9.0-]} {
             aoc::geom 0.1 geom.tcl
             aoc::intv 0.1 intv.tcl
             aoc::tools 0.1 tools.tcl
+            aoc::boxchars 0.1 boxchars.tcl
         } {
             package ifneeded $pkg $ver \
                 [list source -encoding utf-8 [file join $dir $file]]
